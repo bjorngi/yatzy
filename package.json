@@ -8,7 +8,8 @@
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./src/yatzy.ts",
     "test": "jest",
-    "test:debug": "node --inspect node_modules/.bin/jest --watch --runInBand"
+    "test:debug": "node --inspect node_modules/.bin/jest --watch --runInBand",
+    "dev:debug": "node --inspect node_modules/.bin/ts-node-dev --respawn --transpileOnly ./src/yatzy.ts"
   },
   "author": "",
   "license": "ISC",
