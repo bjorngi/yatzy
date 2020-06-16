@@ -21,3 +21,7 @@ Player one SUM:
 : 47
 
 ```
+
+## Scorecard
+![scorecard](./img/scorecard.jpg)
+
