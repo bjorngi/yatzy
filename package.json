@@ -4,12 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc ./src/yatzy.ts",
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/yatzy.ts",
+    "test": "jest",
+    "test:debug": "node --inspect node_modules/.bin/jest --watch --runInBand"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "rxjs": "^6.5.5",
+    "ramda": "^0.27.0",
+    "rxjs": "^6.5.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0",
+    "ts-node-dev": "^1.0.0-pre.49",
     "tsc": "^1.20150623.0",
     "typescript": "^3.9.5"
   }
