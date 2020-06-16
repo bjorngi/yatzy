@@ -11,6 +11,21 @@ type ScoreFunctions = {
   [key: string]: ScoreFunction
 }
 
+const potentialScore = ({
+  '1': 5,
+  '2': 10,
+  '3': 15,
+  '4': 20,
+  '5': 25,
+  '6': 30,
+  'low strait': 15,
+  'high strait': 20,
+  'yatzy': 50,
+  'full house': 28,
+  'chance': 30,
+})
+
+
 const scoreFunctions: ScoreFunctions = ({
   '1': numberScore(1),
   '2': numberScore(2),
@@ -36,10 +51,18 @@ const calculateResultsInThrow = (yatzyThrow: number[], scoreFunctions: ScoreFunc
 }
 
 const calculateBestResult = (resultsInThrow: Scoreboard) => Object.entries(resultsInThrow).reduce((acc, [key, value]) => {
+  const weight = value/potentialScore[key]
+
   if(acc === undefined) {
-    return [key, value]
-  } else if (acc[1] < value) {
-    return [key, value]
+    return [key, {
+      score: value,
+      weight: weight
+    }]
+  } else if (acc.weight < weight) {
+    return [key, {
+      score: value,
+      weight: weight
+    }]
   } else {
     return acc
   }
@@ -60,7 +83,7 @@ const playRound = (scoreBoard: Scoreboard = {}, tryNumber = 0): Scoreboard => {
     const yatzyThrow = throw5dice()
     const resultsInThrow = calculateResultsInThrow(yatzyThrow, scoreFunctions, scoreBoard)
     const bestResult = calculateBestResult(resultsInThrow)
-    const newScoreBoard = addToScoreboard(scoreBoard, bestResult)
+    const newScoreBoard = addToScoreboard(scoreBoard, [bestResult[0], bestResult[1].score])
 
     return playRound(newScoreBoard, tryNumber + 1)
 }
