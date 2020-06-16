@@ -22,6 +22,7 @@ const scoreFunctions: ScoreFunctions = ({
   'high strait': highStraitScore,
   'yatzy': yatzyScore,
   'full house': fullHouseScore,
+  'chance': (yatzyThrow) => yatzyThrow.reduce((acc, die) => acc+die, 0)
 })
 
 
@@ -50,7 +51,7 @@ const addToScoreboard = (scoreBoard: Scoreboard, bestResult: any) => ({
   ...R.fromPairs([bestResult])
 })
 
-const numberOfTries = 10
+const numberOfTries = Object.keys(scoreFunctions).length
 const playRound = (scoreBoard: Scoreboard = {}, tryNumber = 0): Scoreboard => {
     if(tryNumber === numberOfTries) {
       return scoreBoard
@@ -71,8 +72,3 @@ const calculateScore = (scorecard: Scoreboard) => (
 const player1scorecard = playRound()
 console.log('Player one scorecard:\n:', player1scorecard)
 console.log('Player one SUM:\n:', calculateScore(player1scorecard))
-
-// const player2scorecard = playRound()
-// console.log('Player two scorecard:\n:', player2scorecard)
-// console.log('Player two sum:\n:', calculateScore(player2scorecard))
-
